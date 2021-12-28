@@ -413,6 +413,7 @@ tableOption
     : ENGINE '='? engineName                                        #tableOptionEngine
     | AUTO_INCREMENT '='? decimalLiteral                            #tableOptionAutoIncrement
     | AVG_ROW_LENGTH '='? decimalLiteral                            #tableOptionAverage
+    | BLOCK_FORMAT '='? blockFormat                                 #tableOptionBlockFormat
     | DEFAULT? (CHARACTER SET | CHARSET) '='? (charsetName|DEFAULT) #tableOptionCharset
     | (CHECKSUM | PAGE_CHECKSUM) '='? boolValue=('0' | '1')         #tableOptionChecksum
     | DEFAULT? COLLATE '='? collationName                           #tableOptionCollate
@@ -441,6 +442,14 @@ tableOption
     | tablespaceStorage                                             #tableOptionTablespace
     | TRANSACTIONAL '='? ('0' | '1')                                #tableOptionTransactional
     | UNION '='? '(' tables ')'                                     #tableOptionUnion
+    ;
+
+blockFormat
+    : ENCRYPTED
+    ;
+
+tableType
+    : MYSQL | ODBC
     ;
 
 tablespaceStorage
@@ -2451,7 +2460,7 @@ keywordsCanBeId
     | DATA | DATAFILE | DEALLOCATE
     | DEFAULT_AUTH | DEFINER | DELAY_KEY_WRITE | DES_KEY_FILE | DIAGNOSTICS | DIRECTORY
     | DISABLE | DISCARD | DISK | DO | DUMPFILE | DUPLICATE
-    | DYNAMIC | ENABLE | ENCRYPTION | END | ENDS | ENGINE | ENGINES
+    | DYNAMIC | ENABLE | ENCRYPTION | ENCRYPTED | END | ENDS | ENGINE | ENGINES
     | ERROR | ERRORS | ESCAPE | EVEN | EVENT | EVENTS | EVERY
     | EXCHANGE | EXCLUSIVE | EXPIRE | EXPORT | EXTENDED | EXTENT_SIZE | FAST | FAULTS
     | FIELDS | FILE_BLOCK_SIZE | FILTER | FIRST | FIXED | FLUSH
